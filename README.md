@@ -1,4 +1,4 @@
-# 👻 Power Model Loader
+# 👻 Luci Model Loader
 
 Part of the **👻 Luci** custom-node collection for ComfyUI.
 
@@ -7,13 +7,13 @@ Part of the **👻 Luci** custom-node collection for ComfyUI.
 Switch between complete model bundles by selecting a group. Each group accepts
 MODEL, CLIP, and VAE connections from your existing loaders or subgraphs.
 
-![Power Model Loader with two connected model groups and the INT8 group selected](docs/images/power-model-loader.png)
+![Luci Model Loader with two connected model groups and the INT8 group selected](docs/images/power-model-loader.png)
 
-**Status: experimental, v0.5.8.** Automated tests pass, but a successful live
+**Status: experimental, v0.5.9.** Automated tests pass, but a successful live
 generation with this release has not yet been verified. The custom UI targets
 the classic canvas renderer, not every frontend rendering mode.
 
-Version 0.5.8, under **👻 Luci → loaders**. Uses the existing
+Version 0.5.9, under **👻 Luci → loaders**. Uses the existing
 `PowerModelLoader` class ID to preserve workflows. Replace the previous folder;
 do not install a second copy alongside it.
 
@@ -34,13 +34,16 @@ naming. Existing explicitly named groups retain their names.
 
 New nodes start at 420 pixels wide and can shrink to 320 pixels. Existing
 workflow sizes are preserved. Filenames truncate to the available space.
-The Add group action is a rounded teal button below the final card.
+The Add group action is a rounded mint-green button below the final card.
+Version 0.5.9 renames the displayed node to **👻 Luci Model Loader** and uses
+charcoal surfaces with mint-green accents. The installation folder remains
+`ComfyUI-Luci-Power-Model-Loader` and the node ID is unchanged.
 
 The custom canvas layout targets ComfyUI's classic canvas renderer. Filename
 discovery reads known loader widgets, including immediate nodes inside a
 subgraph. Unknown/custom source nodes display their title as a fallback.
 
-Power Model Loader is a ComfyUI custom node that switches one complete external
+Luci Model Loader is a ComfyUI custom node that switches one complete external
 model bundle at a time. Each named group accepts three normal ComfyUI links:
 
 - `MODEL`
@@ -90,19 +93,19 @@ of this node. Older folders named `ComfyUI-Power-Model-Loader` and
    `Luci-Power-Model-Loader` installations before using this package. They
    register the same node ID.
 3. Restart ComfyUI.
-4. Find **👻 Power Model Loader** under **👻 Luci → loaders**.
+4. Find **👻 Luci Model Loader** under **👻 Luci → loaders**.
 
 There are no Python package dependencies.
 
 ## Usage
 
 1. Add your normal model loader nodes to the workflow.
-2. Add **Power Model Loader**.
+2. Add **Luci Model Loader**.
 3. Connect one loader's `MODEL`, `CLIP`, and `VAE` outputs to Group 1.
 4. Double-click the group card header to give it a useful name inline.
 5. Use **Add input group** for additional model bundles.
 6. Click the desired group card to select that complete bundle.
-7. Connect the Power Model Loader's three outputs to the rest of your workflow.
+7. Connect the Luci Model Loader's three outputs to the rest of your workflow.
 
 Group names, group sockets, connections, and the selected group are stored in
 the workflow.
@@ -112,7 +115,7 @@ the workflow.
 The loader routes the selected group's MODEL, CLIP, and VAE to downstream
 nodes while keeping the rest of the workflow connected.
 
-![Example ComfyUI workflow using Power Model Loader alongside prompt encoding, sampling, VAE decoding, and image output](docs/images/example-workflow.png)
+![Example ComfyUI workflow using Luci Model Loader alongside prompt encoding, sampling, VAE decoding, and image output](docs/images/example-workflow.png)
 
 Screenshots supplied by the author illustrate the UI and workflow layout;
 they are not a verification of every supported model or frontend version.

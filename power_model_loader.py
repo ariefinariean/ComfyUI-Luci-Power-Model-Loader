@@ -172,7 +172,7 @@ class PowerModelLoader:
         if missing:
             display_name = _group_name(group_id, group_config)
             raise ValueError(
-                f"Power Model Loader group '{display_name}' is missing: "
+                f"Luci Model Loader group '{display_name}' is missing: "
                 + ", ".join(missing)
                 + ". Connect all three inputs for the selected group."
             )
