@@ -1,0 +1,10 @@
+[project]
+name = "comfyui-luci-power-model-loader"
+version = "0.5.8"
+description = "A lazy 16-group MODEL, CLIP, and VAE bundle switcher for ComfyUI."
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.comfy]
+PublisherId = "local"
+DisplayName = "👻 Power Model Loader"
