@@ -259,8 +259,9 @@ function installPowerModelUi(node) {
   let addWidget;
   let applyingLayout = false;
   let renameEditor = null;
-  node.color = '#24272c';
-  node.bgcolor = '#2c2f34';
+  if (['👻 Power Model Loader', 'Power Model Loader', '👻 Luci Model Loader'].includes(node.title)) node.title = '👻 Luci Model Loader';
+  node.color = '#202020';
+  node.bgcolor = '#282828';
   node.size[0] = DEFAULT_NODE_WIDTH;
   const groupTitle = (group) => {
     if (group.autoTitle === false) return group.name;
@@ -376,7 +377,7 @@ function installPowerModelUi(node) {
 
   addWidget = node.addWidget("button", "Add input group", null, () => {
     if (state.groups.length >= MAX_GROUPS) {
-      window.alert(`Power Model Loader supports up to ${MAX_GROUPS} groups.`);
+      window.alert(`Luci Model Loader supports up to ${MAX_GROUPS} groups.`);
       return;
     }
     const used = new Set(state.groups.map((group) => group.id));
@@ -391,7 +392,7 @@ function installPowerModelUi(node) {
 
   const removeGroup = (group) => {
     if (state.groups.length === 1) {
-      window.alert("Power Model Loader must keep at least one group.");
+      window.alert("Luci Model Loader must keep at least one group.");
       return;
     }
     const removedIndex = state.groups.findIndex((candidate) => candidate.id === group.id);
@@ -438,11 +439,11 @@ function installPowerModelUi(node) {
       height: `${Math.max(22, (CARD_HEADER_HEIGHT - 6) * scale)}px`,
       boxSizing: "border-box",
       zIndex: "100000",
-      border: "1px solid #55b6db",
+      border: "1px solid #70d6a1",
       borderRadius: `${Math.max(3, 4 * scale)}px`,
       outline: "none",
-      background: "#181c22",
-      color: "#eaf7ff",
+      background: "#181818",
+      color: "#e6eee9",
       padding: `0 ${Math.max(6, 8 * scale)}px`,
       font: `600 ${Math.max(11, 12 * scale)}px Inter, Arial, sans-serif`,
       boxShadow: "0 0 0 1px rgba(83, 164, 196, .28)",
@@ -478,16 +479,16 @@ function installPowerModelUi(node) {
       const y = cardY(index);
       const active = group.id === state.activeGroup;
       roundedRect(ctx, 7, y, width - 14, CARD_HEIGHT, 7);
-      ctx.fillStyle = active ? "#1b2931" : "#1b1e24";
+      ctx.fillStyle = active ? "#293b31" : "#282828";
       ctx.fill();
-      ctx.strokeStyle = active ? "#53a4c4" : "#454b55";
+      ctx.strokeStyle = active ? "#70d6a1" : "#484848";
       ctx.lineWidth = active ? 1.5 : 1;
       ctx.stroke();
 
       ctx.beginPath();
       ctx.moveTo(7, y + CARD_HEADER_HEIGHT);
       ctx.lineTo(width - 7, y + CARD_HEADER_HEIGHT);
-      ctx.strokeStyle = active ? "#3e7185" : "#343943";
+      ctx.strokeStyle = active ? "#527b63" : "#484848";
       ctx.lineWidth = 1;
       ctx.stroke();
     });
@@ -505,20 +506,20 @@ function installPowerModelUi(node) {
     ctx.textBaseline = "middle";
     const buttonY = node.__powerModelLayout.controlsTop;
     roundedRect(ctx, 14, buttonY, width - 28, 30, 6);
-    ctx.fillStyle = state.groups.length < MAX_GROUPS ? '#00ada7' : '#46575b';
+    ctx.fillStyle = state.groups.length < MAX_GROUPS ? '#70d6a1' : '#4c5850';
     ctx.fill();
     ctx.textAlign = 'center';
-    ctx.fillStyle = '#082d30';
+    ctx.fillStyle = '#0b3020';
     ctx.font = '600 12px Inter, Arial, sans-serif';
     ctx.fillText('+ Add group', width / 2, buttonY + 15);
     ctx.textAlign = 'left';
     ctx.textAlign = 'right';
     ctx.font = '12px Inter, Arial, sans-serif';
-    ctx.fillStyle = '#b7bec8';
+    ctx.fillStyle = '#b6c4bb';
     KINDS.forEach(([,type], index) => ctx.fillText(type, width - 13, 20 + index * 24));
     ctx.textAlign = 'left';
 
-    ctx.fillStyle = "#aab3bf";
+    ctx.fillStyle = "#a2b2a7";
     ctx.font = "700 9px Inter, Arial, sans-serif";
     ctx.fillText("MODEL GROUPS", 12, CARD_TOP - 13);
     const complete = state.groups.filter(g => connectionCount(g) === 3).length;
@@ -528,10 +529,10 @@ function installPowerModelUi(node) {
     const selected = state.groups.find(g => g.id === state.activeGroup);
     ctx.fillText('ACTIVE MODEL GROUP', 18, 20);
     ctx.font = '600 12px Inter, Arial, sans-serif';
-    ctx.fillStyle = '#e0e7ed';
+    ctx.fillStyle = '#e6eee9';
     ctx.fillText(fitText(ctx, groupTitle(selected), width - 140), 18, 42);
     ctx.font = '10px Inter, Arial, sans-serif';
-    ctx.fillStyle = '#91b3bd';
+    ctx.fillStyle = '#a9c0b2';
     ctx.fillText(bypassedSources(selected)
       ? 'Bypassed loaders · restored when queued'
       : `${connectionCount(selected)} / 3 inputs connected`, 18, 65);
@@ -539,11 +540,11 @@ function installPowerModelUi(node) {
     state.groups.forEach((group, index) => {
       const y = cardY(index);
       const active = group.id === state.activeGroup;
-      ctx.fillStyle = active ? "#dff5ff" : "#e2e6eb";
+      ctx.fillStyle = active ? "#d9ffea" : "#e6eee9";
       ctx.font = "650 12px Inter, Arial, sans-serif";
       ctx.fillText(fitText(ctx, groupTitle(group), width - 160), 34, y + 19);
       ctx.font = '9px Inter, Arial, sans-serif';
-      ctx.fillStyle = '#8193a3';
+      ctx.fillStyle = '#a1b7a8';
       ctx.fillText(String(index + 1).padStart(2, '0'), 14, y + 19);
       ctx.fillText(group.autoTitle !== false ? 'Title from connected source' : 'Custom title', 34, y + 37);
       ctx.textAlign = 'right';
@@ -553,10 +554,10 @@ function installPowerModelUi(node) {
         const input = node.inputs?.find(i => i.name === inputName(group.id, kind));
         const rowY = y + SLOT_FIRST_OFFSET + row * SLOT_ROW_HEIGHT;
         ctx.font = '600 10px Inter, Arial, sans-serif';
-        ctx.fillStyle = '#bcc6d1';
+        ctx.fillStyle = '#b6c4bb';
         ctx.fillText(type, 18, rowY);
         ctx.font = '11px Inter, Arial, sans-serif';
-        ctx.fillStyle = '#a5afbb';
+        ctx.fillStyle = '#a2b2a7';
         ctx.fillText(fitText(ctx, input?.__luciFilename || 'not connected', width - 100), 76, rowY);
       });
       if (active) {
@@ -564,9 +565,9 @@ function installPowerModelUi(node) {
         ctx.font = "800 8px Inter, Arial, sans-serif";
         const badgeWidth = ctx.measureText(badge).width + 14;
         roundedRect(ctx, width - badgeWidth - 17, y + 7, badgeWidth, 16, 4);
-        ctx.fillStyle = "#28657d";
+        ctx.fillStyle = "#315a3f";
         ctx.fill();
-        ctx.fillStyle = "#c9f0ff";
+        ctx.fillStyle = "#d9ffea";
         ctx.fillText(badge, width - badgeWidth - 10, y + 15.5);
       }
     });
@@ -601,21 +602,21 @@ function installPowerModelUi(node) {
     Object.assign(menu.style, {
       position:'fixed', left:`${Math.max(0,Math.min(event.clientX,window.innerWidth-240))}px`,
       top:`${Math.max(0,Math.min(event.clientY,window.innerHeight-180))}px`,
-      width:'230px', padding:'6px', background:'#20262b', color:'#e1e8ef',
-      border:'1px solid #46515a',borderRadius:'7px',zIndex:'100000',
+      width:'230px', padding:'6px', background:'#282828', color:'#e6eee9',
+      border:'1px solid #484848',borderRadius:'7px',zIndex:'100000',
       boxShadow:'0 8px 30px #0008',font:'12px Inter,Arial,sans-serif',
     });
     const heading = document.createElement('div');
     heading.textContent = groupTitle(hit);
-    Object.assign(heading.style,{padding:'8px',color:'#94a9b7',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'});
+    Object.assign(heading.style,{padding:'8px',color:'#a1b7a8',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'});
     menu.appendChild(heading);
     const action = (label, callback, disabled=false) => {
       const button=document.createElement('button');
       button.type='button'; button.textContent=label; button.disabled=disabled;
       Object.assign(button.style,{display:'block',width:'100%',textAlign:'left',padding:'10px 8px',
-        background:'transparent',border:'0',borderRadius:'4px',color:label.startsWith('Delete')?'#ff9898':'#e1e8ef',
+        background:'transparent',border:'0',borderRadius:'4px',color:label.startsWith('Delete')?'#ff9898':'#e6eee9',
         cursor:disabled?'default':'pointer',opacity:disabled?'.4':'1',font:'inherit'});
-      button.onmouseenter=()=>{button.style.background='#34424c';};
+      button.onmouseenter=()=>{button.style.background='#304b3b';};
       button.onmouseleave=()=>{button.style.background='transparent';};
       button.onclick=()=>{ closeLuciMenu(); const group=state.groups.find(g=>g.id===id); if(group)callback(group); };
       menu.appendChild(button);
@@ -806,7 +807,9 @@ app.registerExtension({
     const originalConfigure = nodeType.prototype.onConfigure;
     nodeType.prototype.onConfigure = function () {
       const result = originalConfigure?.apply(this, arguments);
-      this.__powerModelLoaderRestore?.();
+      if (['👻 Power Model Loader', 'Power Model Loader'].includes(this.title)) this.title = '👻 Luci Model Loader';
+    this.color = '#202020';this.bgcolor = '#282828';
+    this.__powerModelLoaderRestore?.();
       return result;
     };
   },
