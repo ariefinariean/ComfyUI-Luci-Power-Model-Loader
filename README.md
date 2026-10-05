@@ -2,6 +2,13 @@
 
 Part of the **👻 Luci** custom-node collection for ComfyUI.
 
+## Preview
+
+Switch between complete model bundles by selecting a group. Each group accepts
+MODEL, CLIP, and VAE connections from your existing loaders or subgraphs.
+
+![Power Model Loader with two connected model groups and the INT8 group selected](docs/images/power-model-loader.png)
+
 **Status: experimental, v0.5.8.** Automated tests pass, but a successful live
 generation with this release has not yet been verified. The custom UI targets
 the classic canvas renderer, not every frontend rendering mode.
@@ -99,6 +106,16 @@ There are no Python package dependencies.
 
 Group names, group sockets, connections, and the selected group are stored in
 the workflow.
+
+## Example workflow
+
+The loader routes the selected group's MODEL, CLIP, and VAE to downstream
+nodes while keeping the rest of the workflow connected.
+
+![Example ComfyUI workflow using Power Model Loader alongside prompt encoding, sampling, VAE decoding, and image output](docs/images/example-workflow.png)
+
+Screenshots supplied by the author illustrate the UI and workflow layout;
+they are not a verification of every supported model or frontend version.
 
 ## Validation
 
