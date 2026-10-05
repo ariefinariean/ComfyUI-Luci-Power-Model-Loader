@@ -10,6 +10,13 @@ const source = fs
   .readFileSync(sourcePath, "utf8")
   .replace(/^import\s+\{\s*app\s*\}.*?;\s*/m, "");
 
+assert.ok(source.includes("node.color = '#202020'"));
+assert.ok(source.includes("node.bgcolor = '#282828'"));
+assert.ok(source.includes("'#70d6a1'"));
+const registration=fs.readFileSync(path.join(here,'..','__init__.py'),'utf8');
+assert.ok(registration.includes('"PowerModelLoader": PowerModelLoader'));
+assert.ok(registration.includes('"PowerModelLoader": "👻 Luci Model Loader"'));
+
 let extension;
 const app = {
   registerExtension(value) {
